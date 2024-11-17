@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="bintang2331148&itpln.ac.id">
+	<meta name="description" content="Tugas Laprak 2 Pemrograman Web">
+	<title>Laporan Teori</title>
+	<style>
+		body {
+			font-family: "Times New Roman", Times, serif;
+			line-height: 1.5;
+			text-align: justify;
+			color: black;
+			background-color: #f9f9f9;
+			padding: 15px;
+		}
+
+		h1, h2 {
+			text-align: center;
+		}
+
+		h1 {
+		    font-size: 32px;
+			font-weight: bold;
+			color: #1a73e8;
+		}
+
+		h2 {
+			font-size: 21px;
+			color: #000000;
+		}
+
+		h3 {
+			font-weight: bold;
+			cursor: pointer;
+			color: black;
+			text-align: justify;
+		}
+
+		.content {
+			display: block;
+		}
+
+		em {
+			font-style: italic;
+		}
+
+		/* Gaya buruk untuk mode Kedua */
+		.bad-style {
+			color: beige;
+            background-color: red;
+			font-family: Comic, cursive, serif;
+			line-height: 1.2;
+			padding: 10px;
+			text-align: center;
+			letter-spacing: 10px;
+		}
+
+		.bad-style h1,
+		.bad-style h2,
+		.bad-style h3,
+		.bad-style ul,
+		.bad-style p{
+			color: yellow;
+			animation: randomSpacing 5s infinite alternate;
+		}
+
+		/* Animasi teks gaya buruk */
+		@keyframes randomSpacing {
+			0% {
+				letter-spacing: -2px;
+			}
+			25% {
+				letter-spacing: 5px;
+			}
+			50% {
+				letter-spacing: -4px;
+			}
+			75% {
+				letter-spacing: 6px;
+			}
+			100% {
+				letter-spacing: 3px;
+			}
+		}
+
+		/* Toggle antara gaya bagus dan buruk */
+		.bad-mode body {
+			color: #ff00ff;
+		}
+
+		/* Gaya baru untuk ditambahkan ke konten HTML */
+		.container {
+			width: 90vw;
+			margin: 20px auto;
+		}
+
+		/* Editor toolbar */
+		.toolbar {
+			margin-top: 10px;
+			display: none;
+			flex-wrap: wrap;
+			gap: 5px;
+			justify-content: center;
+		}
+
+		.toolbar button,
+		.toolbar select {
+			padding: 5px;
+			margin: 2px;
+		}
+
+		/* Tampilan Gaya Tombol Mengambang */
+		#toggleStyleButton,
+		#toggleEditorButton {
+			position: fixed;
+			z-index: 9999;
+			width: 50px;
+			height: 50px;
+			cursor: pointer;
+			border-radius: 50%;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+			font-weight: bold;
+			font-size: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+			transition: background-color 0.3s ease, transform 0.3s ease;
+		}
+
+		#toggleStyleButton {
+			bottom: 5px;
+			left: 5px;
+		}
+
+		#toggleEditorButton {
+			bottom: 5px;
+			right: 5px;
+		}
+
+		/* Efek hover */
+
+		#toggleStyleButton:hover,
+		#toggleEditorButton:hover {
+			background-color: rgba(0, 0, 0, 0.7);
+			transform: scale(1.1);
+		}
+
+		/* Default untuk layar desktop besar (> 1200px) */
+		@media (min-width: 1200px) {
+			body {
+				font-size: 30px;
+				background-image: linear-gradient(to bottom right, #94CC68, #8BD4B0)
+			}
+			.content {
+				max-width: 1000px;
+				margin: 0 auto;
+				border-radius: 5px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				background: white;
+			}
+
+			.hr-style {
+				margin: 0 auto;
+				width: 995px;
+				height: 3px;
+				background-color: #000000;
+			}
+		}
+
+		/* Untuk laptop atau layar sedang (768px - 1200px) */
+		@media (min-width: 768px) and (max-width: 1199px) {
+			body {
+				font-size: 16px;
+				background-image: linear-gradient(to bottom, #BBCC7D, #90CCBF)
+			}
+			.content {
+				max-width: 800px;
+				margin: 0 auto;
+				background: #FCFBFF;
+				border-radius: 7px;
+				box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+			}
+
+			.hr-style {
+				margin: 0 auto;
+				width: 785px;
+				height: 3px;
+				background-color: #000000;
+			}
+		}
+
+		/* Untuk perangkat Android atau layar kecil (320px - 767px) */
+		@media (max-width: 767px) {
+			body {
+				font-size: 14px;
+				background-image: linear-gradient(to bottom right, #FF9B86, #D6A4D5)
+
+			}
+			.content {
+				max-width: 800px;
+				margin: 0 auto;
+				background: #FCFBFF;
+				border-radius: 8px;
+				box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+			}
+
+			.hr-style {
+                margin: 0px
+                width: 673px;
+				height: 3px;
+				background-color: #000000;
+			}
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js" integrity="sha512-tVYBzEItJit9HXaWTPo8vveXlkK62LbA+wez9IgzjTmFNLMBO1BEYladBw2wnM3YURZSMUyhayPCoLtjGh84NQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+	<div class="content" id="editableContent1" contenteditable="true" oninput="saveState()">
+		<h1>LAPORAN TEORI</h1>
+		<h2>Bintang Febrian Setiadi | 202331148</h2>
+	</div>
+	<hr class="hr-style">
+	<div class="content" style="text-align:center; font-size:20px; padding-top:5px" onclick="toggleContent(this)">
+		<u>Ringkasan HTML, CSS, dan JavaScript dalam Pengembangan Web</u>
+	</div>
+	<div>
+	<div class="content" id="editableContent2" contenteditable="true" oninput="saveState()">
+		<h3 onclick="toggleContent(this)">1. Mengapa Menggunakan HTML, CSS, dan JavaScript dalam Pemrograman Web?</h3>
+		<ul>
+			<li><strong>HTML</strong> <i>(Hyper Text Markup Language)</i> merupakan salah satu bahasa pengodean yang berfungsi membangun struktur dasar dan konten halaman web, seperti teks, gambar, <i>link</i>, dan elemen lainnya. HTML dapat dikatakan sebagai “kerangka” dari setiap halaman web. Tujuannya untuk berbagi informasi agar dapat dibaca dan diakses melalui web peramban.</li>
+<br>
+			<li><strong>CSS</strong> (<i>Cascading Style Sheets</i>) mengatur tampilan halaman, termasuk tata letak, warna, ukuran, dan animasi. CSS memungkinkan pemisahan antara konten dan gaya, sehingga memudahkan pengubahan tampilan tanpa memengaruhi struktur.</li>
+<br>
+			<li><strong><i>JavaScript</i></strong> memungkinkan penambahan interaktif. Dengan bahasa pengodean ini, pengembang dapat membuat halaman yang responsif, memvalidasi input, menambahkan animasi, dan menciptakan pengalaman pengguna yang lebih dinamis. <i>JavaScript</i>				juga memungkinkan pengeditan langsung terhadap elemen HTML dan gaya CSS melalui DOM (<i>Document Object Model</i>).</li>
+		</ul>
+	</div>
+	<div class="content" id="editableContent3" contenteditable="true" oninput="saveState()">
+
+		<h3 onclick="toggleContent(this)">2. Integrasi HTML, CSS, dan JavaScript dalam Pemrograman Web</h3>
+		<ul>
+			<li><strong>HTML sebagai Struktur Dasar</strong>: Elemen HTML seperti <i>tag</i> <span style="background-color:lightgreen"><code>'&lt;header&gt;'</code></span>, <span style="background-color:lightgray"><code>'&lt;footer&gt;'</code></span>, <span style="background-color:yellow"><code>'&lt;section&gt;'</code></span>,
+				dan <span style="background-color:lightblue"><code>'&lt;div&gt;'</code></span> berfungsi membangun struktur yang dapat diberi identitas (<i>id</i>) atau kelas (<i>class</i>) untuk pemformatan dan pengeditan lebih lanjut.</li>
+<br>
+			<li><strong>CSS untuk Tampilan:</strong>
+				<ul style="list-style-type: lower-latin">
+					<li><em>Inline</em>: Gaya ditulis langsung di dalam atribut <i>style</i> pada elemen HTML. Misalnya, <code>'&lt;h1 style="color: blue;"&gt;Judul&lt;/h1&gt;'</code>. Meskipun cara ini cepat, <i>inline</i> CSS tidak disarankan karena sulit dikelola, terutama
+						pada halaman yang kompleks.</li>
+					<li>Internal: Gaya ditulis dalam <i>tag</i> <code>'&lt;style&gt;'</code> di dalam bagian <code>'&lt;head&gt;'</code> dari HTML. Cara ini berguna jika pengaturan CSS hanya berlaku pada satu halaman tertentu, tetapi kurang efektif jika diterapkan pada
+						banyak halaman.</li>
+					<li>Eksternal: Menggunakan <i>file</i> <code>.css</code> terpisah, dihubungkan dengan <code>'&lt;link rel="stylesheet" href="styles.css"&gt;'</code>, untuk manajemen yang lebih mudah.</li>
+				</ul>
+			</li>
+            <br>
+			<li><strong><i>JavaScript</i> untuk Interaktif:</strong>
+				<ul style="list-style-type: lower-latin">
+					<li><em>Inline</em>: Menulis kode dalam atribut <i>event</i> HTML, seperti '<code>onclick</code>'. Hal ini dapat mengurangi waktu yang dibutuhkan untuk menampilkan konten kepada pengguna.</li>
+					<li>Internal: Menulis kode dalam <i> tag</i> <code>'&lt;script&gt;'</code> di antara <i>tag</i> &alt;`<head>`&gt; dan akhir pada <i>tag</i> &alt;`<body>`&gt; dalam <i>file</i> HTML.</li>
+					<li>Eksternal: Menggunakan <i>file</i> <code>'.js'</code> terpisah, dihubungkan dengan menggunakan <i>tag</i> atribut <code>'&lt;script src="script.js"&gt;'</code>, agar struktur rapi dan mudah dikelola.</li>
+				</ul>
+			</li>
+			<p style="text-align: justify">
+			Dengan menggabungkan HTML, CSS, dan <i>JavaScript</i> yang baik membuat situs web lebih efektif, mudah dipelihara, dan cepat. HTML memberikan dasar konten, CSS mempercantik tampilan agar estetis, dan <i>JavaScript</i> menghidupkan situs melalui interaktif.
+		</p>
+		<p style="text-align: right">
+			<!--%TimeStamp%-->17/11/2024 12.14<!---->
+		</p>
+		</ul>
+		</div>
+	</div>
+
+	<!-- Tombol ganti tampilan  -->
+	<button id="toggleStyleButton" onclick="toggleStyle()">Ganti Mode Tampilan</button>
+
+	<!-- Tombol untuk beralih ke editor toolbar -->
+	<button id="toggleEditorButton" onclick="toggleEditorToolbar()">Editor HTML</button>
+
+	<!-- Pilihan Font Family -->
+	<div class="toolbar">
+		<label for="fontFamily">Font Family:</label>
+		<select id="fontFamily" onchange="changeFontFamily(this.value)">
+            <option value="Times">Times New Roman</option>
+            <option value="Arial">Arial</option>
+            <option value="Cambria">Cambria</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+
+		<!-- Pilihan Font Size -->
+		<label for="fontSize">Font Size:</label>
+		<select id="fontSize" onchange="changeFontSize(this.value)">
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+        </select>
+
+		<!-- Toolbar editor -->
+		<button onclick="toggleBold()">Bold</button>
+		<button onclick="toggleItalic()">Italic</button>
+		<button onclick="toggleUnderline()">Underline</button>
+		<button onclick="alignText('left')">Left</button>
+		<button onclick="alignText('center')">Center</button>
+		<button onclick="alignText('right')">Right</button>
+		<button onclick="alignText('justify')">Justify</button>
+		<button onclick="undo()">Undo</button>
+		<button onclick="redo()">Redo</button>
+		<button onclick="changeFontColor()">Font Color</button>
+		<button onclick="printPage()">Print</button>
+		<button onclick="downloadHTML()">Download HTML</button>
+		<button onclick="captureScreenshot()">Screenshot</button>
+		<button onclick="shareViaWhatsApp()">Share via WhatsApp</button>
+	</div>
+
+	<script>
+		// Fungsi untuk mengubah visibilitas toolbar
+let isEditing = false;
+
+function toggleEditorToolbar() {
+    const toolbar = document.querySelector('.toolbar');
+    const editableContent = document.querySelectorAll('[contenteditable="true"]');
+    const toggleButton = document.getElementById('toggleEditorButton');
+
+    if (isEditing) {
+        // Matikan mode pengeditan
+        toolbar.style.display = 'none';
+        editableContent.forEach((element) => {
+            element.setAttribute('contenteditable', 'false');
+        });
+        toggleButton.innerText = 'Editor HTML';
+        isEditing = false;
+    } else {
+        // Aktifkan mode pengeditan
+        toolbar.style.display = 'flex';
+        editableContent.forEach((element) => {
+            element.setAttribute('contenteditable', 'true');
+        });
+        toggleButton.innerText = 'Keluar Editor HTML';
+        isEditing = true;
+    }
+}
+
+// Event listener untuk menonaktifkan contenteditable ketika klik di luar elemen
+document.addEventListener('click', function (event) {
+    document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+        if (!element.contains(event.target) && element.isContentEditable) {
+            element.setAttribute('contenteditable', 'false');
+        }
+    });
+});
+
+// Inisialisasi semua elemen contenteditable agar non-aktif secara default
+document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+    element.setAttribute('contenteditable', 'false');
+    // Event untuk double-click agar elemen dapat diedit
+    element.addEventListener('dblclick', function () {
+        element.setAttribute('contenteditable', 'true');
+        element.focus();
+    });
+});
+
+		// Mengalihkan visibilitas konten
+		function toggleContent(header) {
+			const content = header.nextElementSibling;
+			const isHidden = content.style.display === "none";
+			// Tampilkan custom dialog untuk pilihan Ya/Tidak
+			const confirmation = window.confirm(`Apakah Anda ingin ${isHidden ? 'menampilkan': 'menyembunyikan'} konten?`);
+			// Jika memilih "Ya", lakukan toggle
+			if (confirmation) {
+				content.style.display = isHidden ? "block" : "none";
+			}
+		}
+
+		// Toggle style mode
+		function toggleStyle() {
+			document.body.classList.toggle('bad-style');
+		}
+
+		// Fungsi untuk mengubah font family
+		function changeFontFamily(fontFamily) {
+			document.body.style.fontFamily = fontFamily;
+
+		}
+
+		// Fungsi untuk mengubah ukuran font
+		function changeFontSize(fontSize) {
+			document.body.style.fontSize = fontSize;
+		}
+
+		// Fungsi pemformatan teks
+		function toggleBold() {
+			document.execCommand("bold");
+		}
+
+		function toggleItalic() {
+			document.execCommand("italic");
+		}
+
+		function toggleUnderline() {
+			document.execCommand("underline");
+		}
+
+		function changeFontColor() {
+			const color = prompt("Masukkan warna font (misalnya 'red' atau '#ff0000'):");
+			if (/^#[0-9A-F]{6}$/i.test(color) || /^(red|blue|green|yellow|black|white)$/i.test(color)) {
+        document.execCommand("foreColor", false, color);
+    } else {
+        alert("Invalid color. Please try again.");
+    }
+}
+
+		//Mensejajarkan Teks
+		function alignText(alignment) {
+			const selectedText = window.getSelection().anchorNode.parentElement;
+			if (selectedText) {
+				selectedText.style.textAlign = alignment;
+			}
+		}
+
+		// Inisialisasi history stack untuk undo dan redo per elemen
+		const undoStacks = new Map();
+		const redoStacks = new Map();
+		let lastEditedElement = null;
+		// Inisialisasi untuk setiap elemen 'contenteditable'
+		document.querySelectorAll('.content').forEach(element => {
+			element.addEventListener('dblclick', () => activateContentEditable(element));
+			element.addEventListener('input', () => saveState(element));
+			document.addEventListener('click', event => deactivateContentEditable(event, element));
+		});
+
+		function activateContentEditable(element) {
+			element.setAttribute('contenteditable', 'true');
+			element.focus();
+			// Set elemen yang sedang diedit
+			lastEditedElement = element;
+			// Inisialisasi undo/redo stack jika belum ada
+			if (!undoStacks.has(element)) {
+				undoStacks.set(element, [element.innerHTML]);
+				redoStacks.set(element, []);
+			}
+		}
+
+		function deactivateContentEditable(event, element) {
+			if (!element.contains(event.target) && element.isContentEditable) {
+				element.setAttribute('contenteditable', 'false');
+			}
+		}
+
+		function saveState(element) {
+			const undoStack = undoStacks.get(element);
+			const redoStack = redoStacks.get(element);
+			// Simpan konten terbaru dan reset redo stack
+			undoStack.push(element.innerHTML);
+			redoStack.length = 0;
+		}
+
+		//Fungsi Undo
+		function undo() {
+			if (lastEditedElement) {
+				const undoStack = undoStacks.get(lastEditedElement);
+				const redoStack = redoStacks.get(lastEditedElement);
+				if (undoStack && undoStack.length > 1) {
+					redoStack.push(undoStack.pop());
+					lastEditedElement.innerHTML = undoStack[undoStack.length - 1];
+				}
+			}
+		}
+
+		//Fungsi Redo
+		function redo() {
+			if (lastEditedElement) {
+				const undoStack = undoStacks.get(lastEditedElement);
+				const redoStack = redoStacks.get(lastEditedElement);
+				if (redoStack && redoStack.length > 0) {
+					undoStack.push(redoStack.pop());
+					lastEditedElement.innerHTML = undoStack[undoStack.length - 1];
+				}
+			}
+		}
+
+		//Print HTML
+		function printPage() {
+			window.print();
+		}
+
+		// Unduh HTML source code
+		function downloadHTML() {
+			const blob = new Blob([document.documentElement.outerHTML], {
+				type: "text/html"
+			});
+			const link = document.createElement("a");
+			link.href = URL.createObjectURL(blob);
+			link.download = "document.html";
+			link.click();
+		}
+
+		// Fungsi Screenshot
+		function captureScreenshot() {
+			html2canvas(document.querySelector(".content")).then(canvas => {
+				const imgName = prompt("Enter image name:");
+				const link = document.createElement("a");
+				link.download = imgName + ".jpg";
+				link.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+				link.click();
+			});
+		}
+
+		// Membagikan isi (teks) HTML via WhatsApp
+		function shareViaWhatsApp() {
+			const text = document.body.innerText;
+			const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+			window.open(whatsappURL,
+				'_blank');
+		}
+	</script>
+
+    </body>
+
+</html>
